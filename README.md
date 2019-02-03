@@ -28,3 +28,19 @@ data: {"updated":"2019-02-01T19:48:36.119","now":{"artist":"Anton Liljedahl","ti
 data: {"updated":"2019-02-01T19:48:36.119","now":{"artist":"Anton Liljedahl","title":"Vónarsjón","start":"2019-02-01T19:48:34.228"},"next":{"artist":"Evi Tausen","title":"Neon Moon","start":"2019-02-01T19:52:56.924"}}
 data: {"updated":"2019-02-01T19:52:49.352","now":{"artist":"Evi Tausen","title":"Neon Moon","start":"2019-02-01T19:52:47.664"},"next":{"artist":"Arnold Ludvig Sextet","title":"Miles Beyond","start":"2019-02-01T19:56:42.840"}}
 ```
+
+## Data model
+
+"Now playing" stream is turned into a graph with two types of nodes (modeled after [schema.org types](https://schema.org/)):
+
+### Band / artist
+> https://schema.org/MusicGroup
+
+* `name`
+
+### Song
+> https://schema.org/MusicRecording
+
+* `byArtist` -> a graph's edge linking to band / artist
+* `duration`([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT6M33S`)
+* `name`

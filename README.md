@@ -1,6 +1,14 @@
 # now-playing-graph
 Processes "now playing" data from [internet radio player](https://kvf.fo/popout/widget) for [Faroese Útvarp](https://kvf.fo/forsida/english).
 
+## Why?
+
+As a fan of all Faroese aspects, I'm curius to know:
+
+* which artist is most frequently played?
+* which artist songs are played for the the longest time?
+* is some artist typically followed by another one?
+
 ## Collecting the data
 
 The following bash script is run every minute to scripe "now playing" data from kvf.fo site:

@@ -21,18 +21,6 @@ The following bash script is run every minute to scripe "now playing" data from 
 curl -s --max-time 3 'https://netvarp.kringvarp.fo:80/sse' 2>&1  | grep data >> ~/kvf.log
 ```
 
-Here's the snippet of collected data:
-
-```json
-data: {"updated":"2019-02-01T19:40:20.322","now":{"artist":"Hamradun","title":"Sinklars vísa","start":"2019-02-01T19:40:18.839"},"next":{"artist":"Anton Liljedahl","title":"Vónarsjón","start":"2019-02-01T19:48:35.668"}}
-data: {"updated":"2019-02-01T19:40:20.322","now":{"artist":"Hamradun","title":"Sinklars vísa","start":"2019-02-01T19:40:18.839"},"next":{"artist":"Anton Liljedahl","title":"Vónarsjón","start":"2019-02-01T19:48:35.668"}}
-data: {"updated":"2019-02-01T19:48:36.119","now":{"artist":"Anton Liljedahl","title":"Vónarsjón","start":"2019-02-01T19:48:34.228"},"next":{"artist":"Evi Tausen","title":"Neon Moon","start":"2019-02-01T19:52:56.924"}}
-data: {"updated":"2019-02-01T19:48:36.119","now":{"artist":"Anton Liljedahl","title":"Vónarsjón","start":"2019-02-01T19:48:34.228"},"next":{"artist":"Evi Tausen","title":"Neon Moon","start":"2019-02-01T19:52:56.924"}}
-data: {"updated":"2019-02-01T19:48:36.119","now":{"artist":"Anton Liljedahl","title":"Vónarsjón","start":"2019-02-01T19:48:34.228"},"next":{"artist":"Evi Tausen","title":"Neon Moon","start":"2019-02-01T19:52:56.924"}}
-data: {"updated":"2019-02-01T19:48:36.119","now":{"artist":"Anton Liljedahl","title":"Vónarsjón","start":"2019-02-01T19:48:34.228"},"next":{"artist":"Evi Tausen","title":"Neon Moon","start":"2019-02-01T19:52:56.924"}}
-data: {"updated":"2019-02-01T19:52:49.352","now":{"artist":"Evi Tausen","title":"Neon Moon","start":"2019-02-01T19:52:47.664"},"next":{"artist":"Arnold Ludvig Sextet","title":"Miles Beyond","start":"2019-02-01T19:56:42.840"}}
-```
-
 ## Data model
 
 "Now playing" stream is turned into a graph with two types of nodes (modeled after [schema.org types](https://schema.org/)):
@@ -48,3 +36,32 @@ data: {"updated":"2019-02-01T19:52:49.352","now":{"artist":"Evi Tausen","title":
 * `byArtist` -> a graph's edge linking to band / artist
 * `duration`([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT6M33S`)
 * `name`
+
+## Data example
+
+Here's the snippet of collected data:
+
+```json
+data: {"updated":"2019-01-22T20:27:23.930","now":{"artist":"Jasmin","title":"Make Sense","start":"2019-01-22T20:27:22.318"},"next":{"artist":"Teitur","title":"I Want to Be Kind","start":"2019-01-22T20:31:36.810"}}
+data: {"updated":"2019-01-22T20:31:37.973","now":{"artist":"Teitur","title":"I Want to Be Kind","start":"2019-01-22T20:31:36.113"},"next":{"artist":"Hamradun","title":"Ein stutt og stokkut løta","start":"2019-01-22T20:35:45.775"}}
+data: {"updated":"2019-01-22T20:31:37.973","now":{"artist":"Teitur","title":"I Want to Be Kind","start":"2019-01-22T20:31:36.113"},"next":{"artist":"Hamradun","title":"Ein stutt og stokkut løta","start":"2019-01-22T20:35:45.775"}}
+data: {"updated":"2019-01-22T20:31:37.973","now":{"artist":"Teitur","title":"I Want to Be Kind","start":"2019-01-22T20:31:36.113"},"next":{"artist":"Hamradun","title":"Ein stutt og stokkut løta","start":"2019-01-22T20:35:45.775"}}
+data: {"updated":"2019-01-22T20:31:37.973","now":{"artist":"Teitur","title":"I Want to Be Kind","start":"2019-01-22T20:31:36.113"},"next":{"artist":"Hamradun","title":"Ein stutt og stokkut løta","start":"2019-01-22T20:35:45.775"}}
+data: {"updated":"2019-01-22T20:35:42.473","now":{"artist":"Hamradun","title":"Ein stutt og stokkut løta","start":"2019-01-22T20:35:40.614"},"next":{"artist":"Frændur","title":"Uttanumtos","start":"2019-01-22T20:38:26.234"}}
+data: {"updated":"2019-01-22T20:35:42.473","now":{"artist":"Hamradun","title":"Ein stutt og stokkut løta","start":"2019-01-22T20:35:40.614"},"next":{"artist":"Frændur","title":"Uttanumtos","start":"2019-01-22T20:38:26.234"}}
+data: {"updated":"2019-01-22T20:35:42.473","now":{"artist":"Hamradun","title":"Ein stutt og stokkut løta","start":"2019-01-22T20:35:40.614"},"next":{"artist":"Frændur","title":"Uttanumtos","start":"2019-01-22T20:38:26.234"}}
+data: {"updated":"2019-01-22T20:38:19.440","now":{"artist":"Frændur","title":"Uttanumtos","start":"2019-01-22T20:38:17.833"},"next":{"artist":"Wolfgang","title":"Ice Cold","start":"2019-01-22T20:41:45.936"}}
+data: {"updated":"2019-01-22T20:38:19.440","now":{"artist":"Frændur","title":"Uttanumtos","start":"2019-01-22T20:38:17.833"},"next":{"artist":"Wolfgang","title":"Ice Cold","start":"2019-01-22T20:41:45.936"}}
+data: {"updated":"2019-01-22T20:38:19.440","now":{"artist":"Frændur","title":"Uttanumtos","start":"2019-01-22T20:38:17.833"},"next":{"artist":"Wolfgang","title":"Ice Cold","start":"2019-01-22T20:41:45.936"}}
+data: {"updated":"2019-01-22T20:41:47.483","now":{"artist":"Wolfgang","title":"Ice Cold","start":"2019-01-22T20:41:45.668"},"next":{"artist":"Fróði Bjarnason","title":"Where My Home Is","start":"2019-01-22T20:44:46.528"}}
+```
+
+`kvf_stream_to_timeline` helper will turn the above stream into a list of `TimelineEntry` dataclasses:
+
+```python
+TimelineEntry(artist_name='Jasmin', song_title='Make Sense', duration=254)
+TimelineEntry(artist_name='Teitur', song_title='I Want to Be Kind', duration=249)
+TimelineEntry(artist_name='Hamradun', song_title='Ein stutt og stokkut løta', duration=165)
+TimelineEntry(artist_name='Frændur', song_title='Uttanumtos', duration=208)
+TimelineEntry(artist_name='Wolfgang', song_title='Ice Cold', duration=180)
+```

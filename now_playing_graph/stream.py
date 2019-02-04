@@ -10,6 +10,8 @@ from datetime import datetime
 # https://docs.python.org/3.7/library/gzip.html#module-gzip
 from gzip import GzipFile
 
+from .timeline import TimelineEntry
+
 
 def read_gzip(filename):
     """
@@ -24,7 +26,7 @@ def read_gzip(filename):
 def kvf_stream_to_timeline(lines):
     """
     :type lines list[str]
-    :rtype: list[dict]
+    :rtype: list[TimelineEntry]
     """
     last_updated = None
 
@@ -53,7 +55,7 @@ def kvf_stream_to_timeline(lines):
             duration = (end - start).total_seconds()
 
             # yield the next timeline entry
-            yield dict(
+            yield TimelineEntry(
                 artist_name=data['now']['artist'],
                 song_title=data['now']['title'],
                 duration=int(duration)

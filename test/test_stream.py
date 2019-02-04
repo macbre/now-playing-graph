@@ -11,17 +11,17 @@ def test_kvf_stream_to_timeline_gzip():
     timeline = kvf_stream_to_timeline(in_file)
 
     timeline = list(timeline)
-    print(timeline)
+    print('\n'.join([str(entry) for entry in timeline]))
 
     assert len(timeline) == 5
 
-    assert [entry['artist_name'] for entry in timeline] == \
+    assert [entry.artist_name for entry in timeline] == \
            ['Jasmin', 'Teitur', 'Hamradun', 'Frændur', 'Wolfgang']
 
-    assert [entry['song_title'] for entry in timeline] == \
+    assert [entry.song_title for entry in timeline] == \
            ['Make Sense', 'I Want to Be Kind', 'Ein stutt og stokkut løta', 'Uttanumtos', 'Ice Cold']
 
-    assert [entry['duration'] for entry in timeline] == \
+    assert [entry.duration for entry in timeline] == \
            [254, 249, 165, 208, 180]
 
     # assert False

@@ -28,7 +28,7 @@ def kvf_stream_to_timeline(lines):
     :type lines list[str]
     :rtype: list[TimelineEntry]
     """
-    last_updated = None
+    last_updated = current_entry = None
 
     for line in lines:
         # ignore lines without a prefix
@@ -46,21 +46,48 @@ def kvf_stream_to_timeline(lines):
         if current_updated != last_updated:
             # print(data)
 
-            # calculate a diff of now['start] and next['start'] -> song duration
+            # update it
+            last_updated = current_updated
+
+            # no song is currently being played
+            # data: {
+            #   "updated":"2019-01-22T20:57:50.475",
+            #   "now":{"artist":{},"title":{},
+            #   "start":{}},"next":{"artist":{},"title":{},"start":{}}
+            # }
+            if not data['now']['start']:
+                # we were not able to get the duration of the previous song, take it now
+                if current_entry.duration < 0:
+                    end = datetime.fromisoformat(data['updated'])
+                    duration = (end - current_entry.played_at).total_seconds()
+
+                    current_entry.duration = int(duration)
+                    yield current_entry
+
+                continue
+
             start = datetime.fromisoformat(data['now']['start'])
-            end = datetime.fromisoformat(data['next']['start'])
 
-            # 2019-01-22 20:27:22.318000 / 2019-01-22 20:31:36.810000
-            # 0:04:14.492000
-            duration = (end - start).total_seconds()
+            try:
+                # calculate a diff of now['start] and next['start'] -> song duration
+                end = datetime.fromisoformat(data['next']['start'])
 
-            # yield the next timeline entry
-            yield TimelineEntry(
+                # 2019-01-22 20:27:22.318000 / 2019-01-22 20:31:36.810000
+                # 0:04:14.492000
+                duration = (end - start).total_seconds()
+
+            except TypeError:
+                duration = -1
+
+            # build the next timeline entry
+            current_entry = TimelineEntry(
                 artist_name=data['now']['artist'],
                 song_title=data['now']['title'],
                 duration=int(duration),
                 played_at=start
             )
 
-            # update it
-            last_updated = current_updated
+            # we got the next entry as well, so we managed to calculate
+            # the duration of the current song
+            if current_entry.duration > 0:
+                yield current_entry

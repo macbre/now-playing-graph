@@ -83,6 +83,10 @@ def kvf_stream_to_timeline(lines):
 
                 continue
 
+            # artist entry needs to be a string, isn't it?
+            if not isinstance(data['now']['artist'], str):
+                continue
+
             start = datetime.fromisoformat(data['now']['start'])
 
             try:

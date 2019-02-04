@@ -9,7 +9,7 @@ Processes "now playing" data from [internet radio player](https://kvf.fo/popout/
 
 ## Why?
 
-As a fan of all Faroese aspects, I'm curius to know:
+As a fan of all Faroese aspects, I'm curious to know:
 
 * which artist is most frequently played?
 * which artist songs are played for the the longest time?
@@ -17,7 +17,7 @@ As a fan of all Faroese aspects, I'm curius to know:
 
 ## Collecting the data
 
-The following bash script is run every minute to scripe "now playing" data from kvf.fo site:
+The following bash script is run every minute to scrape "now playing" data from kvf.fo site:
 
 ```bash
 curl -s --max-time 3 'https://netvarp.kringvarp.fo:80/sse' 2>&1  | grep data >> ~/kvf.log

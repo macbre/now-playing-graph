@@ -13,7 +13,7 @@ from gzip import GzipFile
 from .timeline import TimelineEntry
 
 
-def read_gzip(filename):
+def read_gzip(filename: str):
     """
     :type filename str
     :rtype: list[str]

@@ -77,10 +77,41 @@ data: {"updated":"2019-02-04T14:37:16.794","now":{"artist":"Vestmenn","title":"R
     # assert False
 
 
+def test_kvf_stream_from_string2():
+    stream = """
+data: {"updated":"2019-01-27T19:55:55.896","now":{"artist":"Moyzeskvartettin","title":"String Quartet No.17 in Bb, K.458 ('The Hunt') 2.Menuetto- Moderato","start":"2019-01-27T19:55:54.386"},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-27T19:59:51.112","now":{"artist":{},"title":"Ann ti Orff","start":"2019-01-27T19:59:49.625"},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-27T19:59:51.112","now":{"artist":{},"title":"Ann ti Orff","start":"2019-01-27T19:59:49.625"},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-27T20:00:48.644","now":{"artist":{},"title":"Carmina Burana FSO","start":"2019-01-27T20:00:47.250"},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-27T21:03:37.157","now":{"artist":{},"title":{},"start":{}},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-27T22:00:27.400","now":{"artist":{},"title":{},"start":{}},"next":{"artist":"Elisa's","title":"Be mig! Se mig! Ge mig!","start":"2019-01-27T22:03:11.724"}}
+data: {"updated":"2019-01-27T22:00:27.400","now":{"artist":{},"title":{},"start":{}},"next":{"artist":"Elisa's","title":"Be mig! Se mig! Ge mig!","start":"2019-01-27T22:03:11.724"}}
+data: {"updated":"2019-01-27T22:00:27.400","now":{"artist":{},"title":{},"start":{}},"next":{"artist":"Elisa's","title":"Be mig! Se mig! Ge mig!","start":"2019-01-27T22:03:11.724"}}
+data: {"updated":"2019-01-27T22:03:08.947","now":{"artist":"Elisa's","title":"Be mig! Se mig! Ge mig!","start":"2019-01-27T22:03:06.959"},"next":{"artist":"Doodle Bugs","title":"Suderø","start":"2019-01-27T22:06:10.573"}}
+""".strip().split("\n")
+
+    timeline = list(kvf_stream_to_timeline(stream))
+
+    print_timeline(timeline)
+
+    assert len(timeline) == 2
+
+    assert [entry.artist_name for entry in timeline] == \
+           ['Moyzeskvartettin', "Elisa's"]
+
+    assert [entry.song_title for entry in timeline] == \
+           ["String Quartet No.17 in Bb, K.458 ('The Hunt') 2.Menuetto- Moderato", 'Be mig! Se mig! Ge mig!']
+
+    assert [entry.duration for entry in timeline] == \
+           [236, 183]
+
+    # assert False
+
+
 def test_read_stream_from_data():
     in_file = read_gzip(path.join(dir_name, '..', 'data', 'kvf.log.gz'))
     timeline = list(kvf_stream_to_timeline(in_file))
 
     # print_timeline(timeline)
 
-    assert len(timeline) == 2094
+    assert len(timeline) == 2197

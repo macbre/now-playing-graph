@@ -73,15 +73,18 @@ def kvf_stream_to_timeline(lines):
             #   "now":{"artist":{},"title":{},
             #   "start":{}},"next":{"artist":{},"title":{},"start":{}}
             # }
-            if not data['now']['start']:
+            if current_entry is not None:
                 # we were not able to get the duration of the previous song, take it now
-                if current_entry.duration < 0:
+                if current_entry and current_entry.duration < 0:
                     end = datetime.fromisoformat(data['updated'])
                     duration = (end - current_entry.played_at).total_seconds()
 
                     current_entry.duration = int(duration)
                     yield current_entry
 
+                current_entry = None
+
+            if not data['now']['start']:
                 continue
 
             # artist entry needs to be a string, isn't it?

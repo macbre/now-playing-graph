@@ -1,5 +1,4 @@
-data: {"updated":"2019-01-22T20:44:46.983","now":{"artist":"Fróði Bjarnason","title":"Where My Home Is","start":"2019-01-22T20:44:45.290"},"next":{"artist":"Vincent","title":"Dyrabart","start":"2019-01-22T20:49:
-01.581"}}
+data: {"updated":"2019-01-22T20:44:46.983","now":{"artist":"Fróði Bjarnason","title":"Where My Home Is","start":"2019-01-22T20:44:45.290"},"next":{"artist":"Vincent","title":"Dyrabart","start":"2019-01-22T20:49:01.581"}}
 data: {"updated":"2019-01-22T20:49:00.526","now":{"artist":"Vincent","title":"Dyrabart","start":"2019-01-22T20:48:58.634"},"next":{"artist":"Enekk","title":"Mín sorg","start":"2019-01-22T20:53:46.022"}}
 
 data: {"updated":"2019-01-22T20:49:00.526","now":{"artist":"Vincent","title":"Dyrabart","start":"2019-01-22T20:48:58.634"},"next":{"artist":"Enekk","title":"Mín sorg","start":"2019-01-22T20:53:46.022"}}
@@ -12,3 +11,10 @@ data: {"updated":"2019-01-22T20:53:46.978","now":{"artist":"Enekk","title":"Mín
 data: {"updated":"2019-01-22T20:53:46.978","now":{"artist":"Enekk","title":"Mín sorg","start":"2019-01-22T20:53:45.177"},"next":{"artist":{},"title":{},"start":{}}}
 data: {"updated":"2019-01-22T20:57:50.475","now":{"artist":{},"title":{},"start":{}},"next":{"artist":{},"title":{},"start":{}}}
 data: {"updated":"2019-01-22T20:57:50.475","now":{"artist":{},"title":{},"start":{}},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-22T20:57:50.475","now":{"artist":{},"title":{},"start":{}},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-22T20:57:50.475","now":{"artist":{},"title":{},"start":{}},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-22T20:57:50.475","now":{"artist":{},"title":{},"start":{}},"next":{"artist":{},"title":{},"start":{}}}
+data: {"updated":"2019-01-22T21:19:53.352","now":{"artist":{},"title":{},"start":{}},"next":{"artist":"KYLIE MINOGUE feat. JACK SAVORETTI","title":"Music's Too Sad Without You (edit)","start":"2019-01-22T22:48:33.340"}}
+data: {"updated":"2019-01-22T21:19:53.352","now":{"artist":{},"title":{},"start":{}},"next":{"artist":"KYLIE MINOGUE feat. JACK SAVORETTI","title":"Music's Too Sad Without You (edit)","start":"2019-01-22T22:48:33.340"}}
+data: {"updated":"2019-01-22T21:19:53.352","now":{"artist":{},"title":{},"start":{}},"next":{"artist":"KYLIE MINOGUE feat. JACK SAVORETTI","title":"Music's Too Sad Without You (edit)","start":"2019-01-22T22:48:33.340"}}
+data: {"updated":"2019-01-22T22:48:34.897","now":{"artist":"KYLIE MINOGUE feat. JACK SAVORETTI","title":"Music's Too Sad Without You (edit)","start":"2019-01-22T22:48:32.993"},"next":{"artist":"Moses Hightower","title":"Ellismellur","start":"2019-01-22T22:51:59.513"}}

@@ -23,6 +23,16 @@ def read_gzip(filename: str):
             yield bytes(line).decode('utf-8')
 
 
+def read_text(filename: str):
+    """
+    :type filename str
+    :rtype: list[str]
+    """
+    with open(filename, mode='rt') as handler:
+        for line in handler:
+            yield line
+
+
 def kvf_stream_to_timeline(lines):
     """
     :type lines list[str]

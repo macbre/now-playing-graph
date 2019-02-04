@@ -3,7 +3,9 @@ Tests for stream.py functions
 """
 from os import path
 
-from now_playing_graph.stream import read_gzip, kvf_stream_to_timeline
+from now_playing_graph.stream import \
+    read_gzip, read_text,\
+    kvf_stream_to_timeline
 
 dir_name = path.dirname(__file__)
 
@@ -32,8 +34,8 @@ def test_kvf_stream_to_timeline_gzip():
 
 
 def test_kvf_stream_to_timeline_missing_timestamps():
-    with open(path.join(dir_name, 'fixtures', 'streamB')) as in_file:
-        timeline = kvf_stream_to_timeline(in_file.readlines())
+    in_file = read_text(path.join(dir_name, 'fixtures', 'streamB'))
+    timeline = kvf_stream_to_timeline(in_file)
 
     timeline = list(timeline)
     print('\n'.join([str(entry) for entry in timeline]))

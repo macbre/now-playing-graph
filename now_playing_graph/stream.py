@@ -2,6 +2,7 @@
 Functions that transform a stream of JSON data fetched from radio stations
 into a timeline list
 """
+import logging
 import json
 
 # https://docs.python.org/dev/library/datetime.html#datetime.datetime.fromisoformat / Python 3.7!
@@ -11,6 +12,9 @@ from datetime import datetime
 from gzip import GzipFile
 
 from .timeline import TimelineEntry
+
+
+logger = logging.getLogger(__file__)
 
 
 def read_gzip(filename: str):
@@ -40,15 +44,18 @@ def kvf_stream_to_timeline(lines):
     """
     last_updated = current_entry = None
 
-    for line in lines:
+    for line_no, line in enumerate(lines):
         # ignore lines without a prefix
         # data: {"updated":"2019-01-22T20:31:37.973","now":..}}
-        if not line.startswith('data: '):
+        if not line.startswith('data: {'):
             continue
 
-        # remove "data: " suffix
-        line = line.strip()[6:]
-        data = json.loads(line)
+        try:
+            # remove "data: " suffix
+            data = json.loads(line.strip()[6:])
+        except json.decoder.JSONDecodeError as ex:
+            logger.error('JSON parsing failed at line #%d: "%s"', line_no, line.strip(), exc_info=True)
+            raise ex
 
         current_updated = data['updated']
 

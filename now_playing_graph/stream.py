@@ -58,7 +58,8 @@ def kvf_stream_to_timeline(lines):
             yield TimelineEntry(
                 artist_name=data['now']['artist'],
                 song_title=data['now']['title'],
-                duration=int(duration)
+                duration=int(duration),
+                played_at=start
             )
 
             # update it

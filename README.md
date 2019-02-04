@@ -59,9 +59,9 @@ data: {"updated":"2019-01-22T20:41:47.483","now":{"artist":"Wolfgang","title":"I
 `kvf_stream_to_timeline` helper will turn the above stream into a list of `TimelineEntry` dataclasses:
 
 ```python
-TimelineEntry(artist_name='Jasmin', song_title='Make Sense', duration=254)
-TimelineEntry(artist_name='Teitur', song_title='I Want to Be Kind', duration=249)
-TimelineEntry(artist_name='Hamradun', song_title='Ein stutt og stokkut løta', duration=165)
-TimelineEntry(artist_name='Frændur', song_title='Uttanumtos', duration=208)
-TimelineEntry(artist_name='Wolfgang', song_title='Ice Cold', duration=180)
+TimelineEntry(artist_name='Jasmin', song_title='Make Sense', duration=254, played_at=datetime.datetime(2019, 1, 22, 20, 27, 22, 318000))
+TimelineEntry(artist_name='Teitur', song_title='I Want to Be Kind', duration=249, played_at=datetime.datetime(2019, 1, 22, 20, 31, 36, 113000))
+TimelineEntry(artist_name='Hamradun', song_title='Ein stutt og stokkut løta', duration=165, played_at=datetime.datetime(2019, 1, 22, 20, 35, 40, 614000))
+TimelineEntry(artist_name='Frændur', song_title='Uttanumtos', duration=208, played_at=datetime.datetime(2019, 1, 22, 20, 38, 17, 833000))
+TimelineEntry(artist_name='Wolfgang', song_title='Ice Cold', duration=180, played_at=datetime.datetime(2019, 1, 22, 20, 41, 45, 668000))
 ```

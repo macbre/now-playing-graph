@@ -24,4 +24,6 @@ def test_kvf_stream_to_timeline_gzip():
     assert [entry.duration for entry in timeline] == \
            [254, 249, 165, 208, 180]
 
+    assert timeline[0].played_at.hour == 20, 'Has been played at 8 pm'
+
     # assert False

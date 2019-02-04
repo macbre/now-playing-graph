@@ -14,7 +14,7 @@ from gzip import GzipFile
 from .timeline import TimelineEntry
 
 
-logger = logging.getLogger(__file__)
+LOGGER = logging.getLogger(__file__)
 
 
 def read_gzip(filename: str):
@@ -54,7 +54,8 @@ def kvf_stream_to_timeline(lines):
             # remove "data: " suffix
             data = json.loads(line.strip()[6:])
         except json.decoder.JSONDecodeError as ex:
-            logger.error('JSON parsing failed at line #%d: "%s"', line_no, line.strip(), exc_info=True)
+            LOGGER.error('JSON parsing failed at line #%d: "%s"',
+                         line_no, line.strip(), exc_info=True)
             raise ex
 
         current_updated = data['updated']

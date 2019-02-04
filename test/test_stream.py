@@ -21,4 +21,7 @@ def test_kvf_stream_to_timeline_gzip():
     assert [entry['song_title'] for entry in timeline] == \
            ['Make Sense', 'I Want to Be Kind', 'Ein stutt og stokkut løta', 'Uttanumtos', 'Ice Cold']
 
+    assert [entry['duration'] for entry in timeline] == \
+           [254, 249, 165, 208, 180]
+
     # assert False

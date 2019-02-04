@@ -1,6 +1,10 @@
 # now-playing-graph
 Processes "now playing" data from [internet radio player](https://kvf.fo/popout/widget) for [Faroese Útvarp](https://kvf.fo/forsida/english).
 
+## Requirements
+
+*Python 3.7 is required* because [`datetime.datetime.fromisoformat` is used](https://docs.python.org/dev/library/datetime.html#datetime.datetime.fromisoformat).
+
 ## Why?
 
 As a fan of all Faroese aspects, I'm curius to know:

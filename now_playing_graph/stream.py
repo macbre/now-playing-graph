@@ -4,6 +4,9 @@ into a timeline list
 """
 import json
 
+# https://docs.python.org/dev/library/datetime.html#datetime.datetime.fromisoformat / Python 3.7!
+from datetime import datetime
+
 # https://docs.python.org/3.7/library/gzip.html#module-gzip
 from gzip import GzipFile
 
@@ -39,12 +42,21 @@ def kvf_stream_to_timeline(lines):
 
         # has the track changed recently?
         if current_updated != last_updated:
-            print(data)
+            # print(data)
+
+            # calculate a diff of now['start] and next['start'] -> song duration
+            start = datetime.fromisoformat(data['now']['start'])
+            end = datetime.fromisoformat(data['next']['start'])
+
+            # 2019-01-22 20:27:22.318000 / 2019-01-22 20:31:36.810000
+            # 0:04:14.492000
+            duration = (end - start).total_seconds()
 
             # yield the next timeline entry
             yield dict(
                 artist_name=data['now']['artist'],
                 song_title=data['now']['title'],
+                duration=int(duration)
             )
 
             # update it

@@ -1,0 +1,6 @@
+language: python
+dist: xenial
+python:
+  - "3.7"
+install: make
+script: make test && make lint

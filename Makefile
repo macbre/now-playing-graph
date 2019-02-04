@@ -1,4 +1,4 @@
-coverage_options = --omit='test/*'
+coverage_options = --include='now_playing_graph/*' --omit='test/*'
 
 install:
 	pip install -e .[dev]

@@ -13,6 +13,7 @@ def get_timeline_stats(timeline):
     top_artists = Counter()
     top_songs = Counter()
     longest_songs = dict()
+    longest_artists = Counter()  # artist whose songs are played for the longest time
 
     for entry in timeline:
         top_artists.update((entry.artist_name,))
@@ -21,8 +22,11 @@ def get_timeline_stats(timeline):
         if entry.song_title not in longest_songs:
             longest_songs[entry.song_title] = entry.duration
 
+            longest_artists += Counter({entry.artist_name: entry.duration})
+
     return dict(
         top_artists=top_artists.most_common(10),
         top_songs=top_songs.most_common(10),
         longest_songs=Counter(longest_songs).most_common(10),
+        longest_artists=Counter(longest_artists).most_common(10),
     )

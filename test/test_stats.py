@@ -29,4 +29,8 @@ def test_stats_for_stream_from_data():
     assert stats['longest_songs'][0] == ('Symphony in C minor I. Allegro molto', 844)
     assert stats['longest_songs'][1] == ('Mendelssohn: Piano Sextet In D, Op. 110 - 1. Allegro Vivace', 773)
 
+    # artist which are most frequently played on the air
+    assert stats['longest_artists'][0] == ('Ilona Prunyi', 2433)  # The Seasons, Op. 37b: May. "May Nights"
+    assert stats['longest_artists'][1] == ('Gothenburg Symphony Orchestra cond. Okko Kamu, Cond.: Okko Kamu', 2210)
+
     # assert False

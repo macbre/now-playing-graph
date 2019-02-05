@@ -25,6 +25,13 @@ def test_models_to_graph_json():
     assert isinstance(node, GraphNode)
     assert node.caption == 'Eivør Pálsdóttir'
     assert node.type == 'MusicGroup'
+    assert node.size == 3
+
+    node = graph['nodes'][-1]
+    assert isinstance(node, GraphNode)
+    assert node.caption == 'Hon leitar'
+    assert node.type == 'MusicRecording'
+    assert node.size == 132
 
     edge = graph['edges'][0]
     assert isinstance(edge, GraphEdge)
@@ -36,5 +43,13 @@ def test_models_to_graph_json():
 
     assert len(graph['nodes']) == 9  # 3 artists
     assert len(graph['edges']) == 6  # and 6 songs
+
+    node = graph['nodes'][0]
+    assert node == GraphNode(
+        id='5834d4db6',
+        caption='Eivør Pálsdóttir',
+        size=3,
+        type='MusicGroup'
+    ).__dict__
 
     # assert False

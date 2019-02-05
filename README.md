@@ -5,7 +5,7 @@ Processes "now playing" data from [internet radio player](https://kvf.fo/popout/
 
 ## Requirements
 
-*Python 3.7 is required* because [`datetime.datetime.fromisoformat` is used](https://docs.python.org/dev/library/datetime.html#datetime.datetime.fromisoformat).
+**Python 3.7 is required** because [`datetime.datetime.fromisoformat` is used](https://docs.python.org/dev/library/datetime.html#datetime.datetime.fromisoformat).
 
 ## Why?
 
@@ -66,4 +66,24 @@ TimelineEntry(artist_name='Teitur', song_title='I Want to Be Kind', duration=249
 TimelineEntry(artist_name='Hamradun', song_title='Ein stutt og stokkut løta', duration=165, played_at=datetime.datetime(2019, 1, 22, 20, 35, 40, 614000))
 TimelineEntry(artist_name='Frændur', song_title='Uttanumtos', duration=208, played_at=datetime.datetime(2019, 1, 22, 20, 38, 17, 833000))
 TimelineEntry(artist_name='Wolfgang', song_title='Ice Cold', duration=180, played_at=datetime.datetime(2019, 1, 22, 20, 41, 45, 668000))
+```
+
+`timeline_to_models` helper will give you a set of models with songs linking back to artists:
+
+```
+<ArtistModel https://schema.org/MusicGroup (Eivør Pálsdóttir)>
+<ArtistModel https://schema.org/MusicGroup (Enekk)>
+<ArtistModel https://schema.org/MusicGroup (Orka)>
+<SongModel https://schema.org/MusicRecording (Elisabeth og Elinborg) duration = "253">
+	--[:byArtist]->(Eivør Pálsdóttir)
+<SongModel https://schema.org/MusicRecording (Mannabarn) duration = "292">
+	--[:byArtist]->(Eivør Pálsdóttir)
+<SongModel https://schema.org/MusicRecording (Vársins ljóð) duration = "274">
+	--[:byArtist]->(Eivør Pálsdóttir)
+<SongModel https://schema.org/MusicRecording (Slatur) duration = "195">
+	--[:byArtist]->(Enekk)
+<SongModel https://schema.org/MusicRecording (Ódn) duration = "268">
+	--[:byArtist]->(Enekk)
+<SongModel https://schema.org/MusicRecording (Hon leitar) duration = "132">
+	--[:byArtist]->(Orka)
 ```

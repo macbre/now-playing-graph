@@ -98,7 +98,7 @@ def timeline_to_models(timeline):
     :rtype: list[BaseModel]
     """
     # create a unique set of artists
-    artists = set([entry.artist_name for entry in timeline])
+    artists = {entry.artist_name for entry in timeline}  # set comprehension
     artists = sorted(artists)
 
     # build a hash of artists models

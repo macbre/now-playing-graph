@@ -11,6 +11,9 @@ from now_playing_graph.graph import models_to_graph_json
 from now_playing_graph.models import timeline_to_models
 from now_playing_graph.stream import read_gzip, kvf_stream_to_timeline
 
+# MIN_SONGS = 1  # Got a 2996 models (1187 artists and 1809 songs)
+MIN_SONGS = 5  # Got a 469 models (76 artists and 393 songs)
+
 
 def main():
     """
@@ -35,7 +38,7 @@ def main():
     logger.info(timeline[-1])
 
     # now get models for artists and songs
-    models = timeline_to_models(timeline)
+    models = timeline_to_models(timeline, min_songs=MIN_SONGS)
 
     # some stats
     artists = len([True for model in models if model.get_type() == 'MusicGroup'])

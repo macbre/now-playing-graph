@@ -38,8 +38,9 @@ def test_models_to_graph_json():
     assert edge.caption == 'byArtist'
 
     # as JSON
-    graph = json.loads(models_to_graph_json(models, as_json=True, json_indent=True))
+    graph = models_to_graph_json(models, as_json=True, json_indent=True)
     print(graph)
+    graph = json.loads(graph)
 
     assert len(graph['nodes']) == 9  # 3 artists
     assert len(graph['edges']) == 6  # and 6 songs

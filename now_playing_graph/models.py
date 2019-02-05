@@ -103,7 +103,7 @@ def timeline_to_models(timeline):
 
     # build a hash of artists models
     artists = {
-        artist: ArtistModel(name=artist) for artist in artists
+        artist: ArtistModel(name=artist, properties={'songs': 0}) for artist in artists
     }
 
     # prepare a list of unique (artist, song) pairs
@@ -112,7 +112,8 @@ def timeline_to_models(timeline):
     for entry in timeline:
         songs.add((entry.artist_name, entry.song_title, entry.duration))
 
-        # TODO: increase songs counter for each artist
+        # increase songs counter for each artist
+        artists[entry.artist_name]['songs'] += 1
 
     # sort the sets to make them more deterministic
     songs = list(sorted(songs))

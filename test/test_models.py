@@ -4,17 +4,29 @@ Tests for models.py module
 from now_playing_graph.models import ArtistModel, SongModel, timeline_to_models
 from now_playing_graph.stream import kvf_stream_to_timeline
 
+from . import STREAM
 
-def test_model():
+
+def test_artist_model():
     artist = ArtistModel(name='Foo Fighters', properties={'songs': 0})
 
-    artist['songs'] += 1
+    artist['songs'] += 2
     artist['foo'] = 'bar'
+    artist['songs'] += 3
 
-    assert artist['songs'] == 1
+    assert artist['songs'] == 5
     assert artist['foo'] == 'bar'
-    assert artist.get_properties() == dict(songs=1, foo='bar')
+    assert artist.get_properties() == dict(songs=5, foo='bar')
+    assert artist.get_size() == 5  # take songs from ArtistModel
     # assert False
+
+
+def test_song_model():
+    artist = SongModel(name='In The Bar')
+    assert artist.get_size() is None
+
+    artist = SongModel(name='In The Bar', properties={'duration': 165})
+    assert artist.get_size() == 165  # take duration from SongModel
 
 
 def test_models():
@@ -32,17 +44,9 @@ def test_models():
 
 
 def test_timeline_to_models():
-    stream = """
-data: {"updated":"2019-01-20T18:50:24.980","now":{"artist":"Eivør Pálsdóttir","title":"Elisabeth og Elinborg","start":"2019-01-20T18:50:23.541"},"next":{"artist":"Benjamin Rajani","title":"Sálmur 40","start":"2019-01-20T18:54:36.950"}}
-data: {"updated":"2019-01-21T04:02:57.133","now":{"artist":"Enekk","title":"Ódn","start":"2019-01-21T04:02:55.506"},"next":{"artist":"Ragnar í vík","title":"You Broke Your Own Heart","start":"2019-01-21T04:07:24"}}
-data: {"updated":"2019-01-23T02:42:21.638","now":{"artist":"Eivør Pálsdóttir","title":"Vársins ljóð","start":"2019-01-23T02:42:19.771"},"next":{"artist":"Jens John Jakobsen","title":"Undur sólar hita","start":"2019-01-23T02:46:54.400"}}
-data: {"updated":"2019-01-26T06:23:55.616","now":{"artist":"Enekk","title":"Slatur","start":"2019-01-26T06:23:54.161"},"next":{"artist":"Taxi","title":"Meistarin","start":"2019-01-26T06:27:09.274"}}
-data: {"updated":"2019-02-04T12:10:24.312","now":{"artist":"Eivør Pálsdóttir","title":"Mannabarn","start":"2019-02-04T12:10:22.916"},"next":{"artist":"The Dreams","title":"Verden vil bedrages","start":"2019-02-04T12:15:15.660"}}
-data: {"updated":"2019-01-22T12:08:11.478","now":{"artist":"Orka","title":"Hon leitar","start":"2019-01-22T12:08:10.052"},"next":{"artist":"Holgar","title":"Veitslan","start":"2019-01-22T12:10:22.780"}}
-""".strip().split("\n")
+    models = timeline_to_models(kvf_stream_to_timeline(STREAM))
 
-    timeline = list(kvf_stream_to_timeline(stream))
-    models = timeline_to_models(timeline)
+    assert len(models) == 9
 
     assert "\n".join(map(repr, models)) == """
 <ArtistModel https://schema.org/MusicGroup (Eivør Pálsdóttir) songs = "3">
@@ -61,5 +65,21 @@ data: {"updated":"2019-01-22T12:08:11.478","now":{"artist":"Orka","title":"Hon l
 <SongModel https://schema.org/MusicRecording (Hon leitar) duration = "132">
 	--[:byArtist]->(Orka)
     """.strip()
+
+    # assert False
+
+
+def test_timeline_to_models_with_min_songs():
+    models = timeline_to_models(kvf_stream_to_timeline(STREAM), min_songs=2)
+
+    assert len(models) == 7
+    assert len([True for model in models if model.get_type() == 'MusicGroup']) == 2
+    assert len([True for model in models if model.get_type() == 'MusicRecording']) == 5
+
+    models = timeline_to_models(kvf_stream_to_timeline(STREAM), min_songs=3)
+
+    assert len(models) == 4
+    assert len([True for model in models if model.get_type() == 'MusicGroup']) == 1
+    assert len([True for model in models if model.get_type() == 'MusicRecording']) == 3
 
     # assert False

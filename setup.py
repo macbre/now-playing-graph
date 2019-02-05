@@ -26,5 +26,11 @@ setup(
         ]
     },
     install_requires=[
-    ]
+    ],
+    entry_points={
+        'console_scripts': [
+            'render_graph=now_playing_graph.scripts.graph_json:main'
+        ],
+    }
+
 )

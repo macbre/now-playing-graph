@@ -39,7 +39,7 @@ curl -s --max-time 3 'https://netvarp.kringvarp.fo:80/sse' 2>&1  | grep data >> 
 * `duration`([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT6M33S`)
 * `name`
 
-## Data example
+## Data examples
 
 Here's the snippet of collected data:
 
@@ -71,9 +71,9 @@ TimelineEntry(artist_name='Wolfgang', song_title='Ice Cold', duration=180, playe
 `timeline_to_models` helper will give you a set of models with songs linking back to artists:
 
 ```
-<ArtistModel https://schema.org/MusicGroup (Eivør Pálsdóttir)>
-<ArtistModel https://schema.org/MusicGroup (Enekk)>
-<ArtistModel https://schema.org/MusicGroup (Orka)>
+<ArtistModel https://schema.org/MusicGroup (Eivør Pálsdóttir) songs = "3">
+<ArtistModel https://schema.org/MusicGroup (Enekk) songs = "2">
+<ArtistModel https://schema.org/MusicGroup (Orka) songs = "1">
 <SongModel https://schema.org/MusicRecording (Elisabeth og Elinborg) duration = "253">
 	--[:byArtist]->(Eivør Pálsdóttir)
 <SongModel https://schema.org/MusicRecording (Mannabarn) duration = "292">
@@ -86,4 +86,90 @@ TimelineEntry(artist_name='Wolfgang', song_title='Ice Cold', duration=180, playe
 	--[:byArtist]->(Enekk)
 <SongModel https://schema.org/MusicRecording (Hon leitar) duration = "132">
 	--[:byArtist]->(Orka)
+```
+
+`models_to_graph_json` helper will then return GraphJSON representation of the timeline:
+
+```json
+{
+ "nodes": [
+  {
+   "id": "5834d4db6",
+   "caption": "Eiv\u00f8r P\u00e1lsd\u00f3ttir",
+   "type": "MusicGroup"
+  },
+  {
+   "id": "51e2d554b",
+   "caption": "Enekk",
+   "type": "MusicGroup"
+  },
+  {
+   "id": "5705c4343",
+   "caption": "Orka",
+   "type": "MusicGroup"
+  },
+  {
+   "id": "1d12586d0",
+   "caption": "Elisabeth og Elinborg",
+   "type": "MusicRecording"
+  },
+  {
+   "id": "dccf0f42d",
+   "caption": "Mannabarn",
+   "type": "MusicRecording"
+  },
+  {
+   "id": "51b04a795",
+   "caption": "V\u00e1rsins lj\u00f3\u00f0",
+   "type": "MusicRecording"
+  },
+  {
+   "id": "308f8a2b4",
+   "caption": "Slatur",
+   "type": "MusicRecording"
+  },
+  {
+   "id": "bef2f5fc9",
+   "caption": "\u00d3dn",
+   "type": "MusicRecording"
+  },
+  {
+   "id": "b73add98e",
+   "caption": "Hon leitar",
+   "type": "MusicRecording"
+  }
+ ],
+ "edges": [
+  {
+   "source": "1d12586d0",
+   "target": "5834d4db6",
+   "caption": "byArtist"
+  },
+  {
+   "source": "dccf0f42d",
+   "target": "5834d4db6",
+   "caption": "byArtist"
+  },
+  {
+   "source": "51b04a795",
+   "target": "5834d4db6",
+   "caption": "byArtist"
+  },
+  {
+   "source": "308f8a2b4",
+   "target": "51e2d554b",
+   "caption": "byArtist"
+  },
+  {
+   "source": "bef2f5fc9",
+   "target": "51e2d554b",
+   "caption": "byArtist"
+  },
+  {
+   "source": "b73add98e",
+   "target": "5705c4343",
+   "caption": "byArtist"
+  }
+ ]
+}
 ```

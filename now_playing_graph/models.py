@@ -30,6 +30,13 @@ class BaseModel:
         raise NotImplementedError(
             '{}.get_type() should be implemented'.format(self.__class__.__name__))
 
+    @staticmethod
+    def get_size():
+        """
+        :rtype: int
+        """
+        return 1
+
     def get_properties(self):
         """
         :rtype: dict
@@ -80,6 +87,12 @@ class ArtistModel(BaseModel):
     def get_type(self):
         return 'MusicGroup'
 
+    def get_size(self):
+        """
+        :rtype: int
+        """
+        return self['songs']
+
 
 class SongModel(BaseModel):
     """
@@ -89,14 +102,26 @@ class SongModel(BaseModel):
     def get_type(self):
         return 'MusicRecording'
 
+    def get_size(self):
+        """
+        :rtype: int
+        """
+        return self['duration']
 
-def timeline_to_models(timeline):
+
+def timeline_to_models(timeline, min_songs: int = None):
     """
-    Builds a set of models representing artists and songs using a provided playlist timeline
+    Builds a set of models representing artists and songs using a provided playlist timeline.
+
+    You can also filter out bands with less than "min_songs" songs
+    to make the graph a bit smaller and more meaningful.
 
     :type timeline list[now_playing_graph.timeline.TimelineEntry]
+    :type min_songs int
     :rtype: list[BaseModel]
     """
+    timeline = list(timeline)
+
     # create a unique set of artists
     artists = {entry.artist_name for entry in timeline}  # set comprehension
     artists = sorted(artists)
@@ -115,6 +140,12 @@ def timeline_to_models(timeline):
         # increase songs counter for each artist
         artists[entry.artist_name]['songs'] += 1
 
+    # filter out artists with less than min_songs
+    if min_songs:
+        artists = {
+            artist: entry for artist, entry in artists.items() if entry['songs'] >= min_songs
+        }
+
     # sort the sets to make them more deterministic
     songs = list(sorted(songs))
 
@@ -127,7 +158,7 @@ def timeline_to_models(timeline):
             properties={'duration': duration},
             relations={'byArtist': artists[artist]}
         )
-        for artist, song, duration in songs
+        for artist, song, duration in songs if artist in artists
     ]
 
     # return both artists and songs (and  make the order deterministic)

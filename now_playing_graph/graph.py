@@ -17,6 +17,7 @@ class GraphNode:
     id: str
     caption: str
     type: str
+    size: int = 1
 
 
 @dataclass
@@ -44,7 +45,8 @@ def models_to_graph_json(models, as_json=False, json_indent=False):
         GraphNode(
             id=model.get_hash(),
             caption=model.name,
-            type=model.get_type()
+            type=model.get_type(),
+            size=model.get_size()
         )
         for model in models
     ]

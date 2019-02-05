@@ -30,6 +30,13 @@ class BaseModel:
         raise NotImplementedError(
             '{}.get_type() should be implemented'.format(self.__class__.__name__))
 
+    @staticmethod
+    def get_size():
+        """
+        :rtype: int
+        """
+        return 1
+
     def get_properties(self):
         """
         :rtype: dict
@@ -80,6 +87,12 @@ class ArtistModel(BaseModel):
     def get_type(self):
         return 'MusicGroup'
 
+    def get_size(self):
+        """
+        :rtype: int
+        """
+        return self['songs']
+
 
 class SongModel(BaseModel):
     """
@@ -88,6 +101,12 @@ class SongModel(BaseModel):
     # https://schema.org/MusicRecording
     def get_type(self):
         return 'MusicRecording'
+
+    def get_size(self):
+        """
+        :rtype: int
+        """
+        return self['duration']
 
 
 def timeline_to_models(timeline):

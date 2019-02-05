@@ -67,3 +67,19 @@ def test_timeline_to_models():
     """.strip()
 
     # assert False
+
+
+def test_timeline_to_models_with_min_songs():
+    models = timeline_to_models(kvf_stream_to_timeline(STREAM), min_songs=2)
+
+    assert len(models) == 7
+    assert len([True for model in models if model.get_type() == 'MusicGroup']) == 2
+    assert len([True for model in models if model.get_type() == 'MusicRecording']) == 5
+
+    models = timeline_to_models(kvf_stream_to_timeline(STREAM), min_songs=3)
+
+    assert len(models) == 4
+    assert len([True for model in models if model.get_type() == 'MusicGroup']) == 1
+    assert len([True for model in models if model.get_type() == 'MusicRecording']) == 3
+
+    # assert False

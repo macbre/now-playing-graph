@@ -1,5 +1,5 @@
 # now-playing-graph
-![](https://raw.githubusercontent.com/macbre/now-playing-graph/master/docs/kvf_player.png)
+![](https://raw.githubusercontent.com/macbre/now-playing-graph/master/docs/graph.png)
 
 Processes "now playing" data from [internet radio player](https://kvf.fo/popout/widget) for [Faroese Útvarp](https://kvf.fo/forsida/english).
 

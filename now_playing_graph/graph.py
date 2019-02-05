@@ -76,4 +76,4 @@ def models_to_graph_json(models, as_json=False, json_indent=False):
         'edges': [edge.__dict__ for edge in edges],
     }
 
-    return json.dumps(graph, indent=json_indent)
+    return json.dumps(graph, indent=True if json_indent else None)

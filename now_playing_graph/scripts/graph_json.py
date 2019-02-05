@@ -1,0 +1,50 @@
+"""
+This script parses playlist stream from /data directory and renders a GraphJSON
+
+Simply execute "render_graph"
+"""
+import logging
+
+from os import path
+
+from now_playing_graph.graph import models_to_graph_json
+from now_playing_graph.models import timeline_to_models
+from now_playing_graph.stream import read_gzip, kvf_stream_to_timeline
+
+
+def main():
+    """
+    Renders a graph
+    """
+    logger = logging.getLogger('render_graph')
+
+    # input file
+    input_file = path.realpath(path.join(
+        path.dirname(__file__),
+        '../../data',
+        'kvf.log.gz'
+    ))
+
+    logger.info("Going to parse a stream from %s", input_file)
+
+    # read and parse the stream into a timeline
+    timeline = list(kvf_stream_to_timeline(read_gzip(input_file)))
+
+    logger.info('Got a timeline with %d entries', len(timeline))
+    logger.info(timeline[0])
+    logger.info(timeline[-1])
+
+    # now get models for artists and songs
+    models = timeline_to_models(timeline)
+
+    # some stats
+    artists = len([True for model in models if model.get_type() == 'MusicGroup'])
+    songs = len([True for model in models if model.get_type() == 'MusicRecording'])
+
+    logger.info('Got a %d models (%d artists and %d songs)', len(models), artists, songs)
+
+    # ok, now render the graph
+    graph_json = models_to_graph_json(models, as_json=True, json_indent=False)
+
+    print('// {} artists and {} songs'.format(artists, songs))
+    print('var graph={};'.format(graph_json))

@@ -1,0 +1,244 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/alchemyjs/0.4.2/alchemy-white.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,600&amp;subset=latin-ext" rel="stylesheet">
+</head>
+<body>
+  <h1 id="title">Artists and their songs aired by Útvarpið</h1>
+  <div class="alchemy" id="graph"></div>
+  <footer>
+      Graph of artists and songs <a href="https://kvf.fo/popout/widget" target="_blank">aired by Faroese Public Radio - kvf.fo</a>.
+      <br>
+      Red nodes represent artists (and are scaled by number of their songs aired),
+      while blue represent songs (scaled by their duration).
+      <br>
+      Web-scraped and rendered using <a href="https://github.com/macbre/now-playing-graph">now-playing-graph</a>
+      and <a href="http://graphalchemist.github.io/Alchemy">Alchemy.js</a>.
+  </footer>
+
+  <style>
+    body {
+      font-family: "Josefin Sans";
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eeeeee+0,aaaaaa+100,7db9e8+100 */
+      background: #3c91d033; /* Old browsers */
+      background: radial-gradient(ellipse at center, #3c91d000 0%,#3c91d030 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    }
+
+    h1 {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      color: #3c91d0;
+      background: #3c91d033;
+      border-bottom: solid 3px #3c91d0;
+      z-index: 2;
+      margin: 0;
+      padding: 0.25em 0.5em;
+    }
+
+    footer {
+        color: #000000bb;
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        font-size: .85em;
+        line-height: 1.75em;
+        text-align: right;
+    }
+
+    footer a {
+        text-decoration: none;
+        color: #3c91d0;
+        font-weight: bold;
+        border-bottom: solid 2px #3c91d066;
+    }
+
+    /* Show Captions */
+    .node text {
+      font-size: 15px;
+      fill: #333333ee;
+      text-shadow: none;
+    }
+    .MusicGroup text {
+      fill: #ef5c5e;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: -1px;
+    }
+
+    .edge.active text {
+      font-size: 10px;
+      fill: #33333399;
+      text-shadow: none !important;
+      font-weight: bold;
+    }
+
+    .edge text {
+      display: block !important;
+    }
+  </style>
+
+  <!-- https://cdnjs.cloudflare.com/ajax/libs/alchemyjs/0.4.2/alchemy.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alchemyjs/0.4.2/scripts/vendor.js"></script>
+  <script src="static/alchemy.js"></script>
+
+  <script type="text/javascript">
+
+	var graph = {
+ "nodes": [
+  {
+   "id": "5834d4db6",
+   "caption": "Eiv\u00f8r P\u00e1lsd\u00f3ttir",
+   "type": "MusicGroup",
+   "size": 3
+  },
+  {
+   "id": "51e2d554b",
+   "caption": "Enekk",
+   "type": "MusicGroup",
+   "size": 2
+  },
+  {
+   "id": "5705c4343",
+   "caption": "Orka",
+   "type": "MusicGroup",
+   "size": 1
+  },
+  {
+   "id": "1d12586d0",
+   "caption": "Elisabeth og Elinborg",
+   "type": "MusicRecording",
+   "size": 253
+  },
+  {
+   "id": "dccf0f42d",
+   "caption": "Mannabarn",
+   "type": "MusicRecording",
+   "size": 292
+  },
+  {
+   "id": "51b04a795",
+   "caption": "V\u00e1rsins lj\u00f3\u00f0",
+   "type": "MusicRecording",
+   "size": 274
+  },
+  {
+   "id": "308f8a2b4",
+   "caption": "Slatur",
+   "type": "MusicRecording",
+   "size": 195
+  },
+  {
+   "id": "bef2f5fc9",
+   "caption": "\u00d3dn",
+   "type": "MusicRecording",
+   "size": 268
+  },
+  {
+   "id": "b73add98e",
+   "caption": "Hon leitar",
+   "type": "MusicRecording",
+   "size": 132
+  }
+ ],
+ "edges": [
+  {
+   "source": "1d12586d0",
+   "target": "5834d4db6",
+   "caption": "byArtist"
+  },
+  {
+   "source": "dccf0f42d",
+   "target": "5834d4db6",
+   "caption": "byArtist"
+  },
+  {
+   "source": "51b04a795",
+   "target": "5834d4db6",
+   "caption": "byArtist"
+  },
+  {
+   "source": "308f8a2b4",
+   "target": "51e2d554b",
+   "caption": "byArtist"
+  },
+  {
+   "source": "bef2f5fc9",
+   "target": "51e2d554b",
+   "caption": "byArtist"
+  },
+  {
+   "source": "b73add98e",
+   "target": "5705c4343",
+   "caption": "byArtist"
+  }
+ ]
+};
+
+
+    var config = {
+      backgroundColor: 'transparent',
+      alpha: 1,
+      divSelector: '#graph',
+      initialScale: 0.3,
+      zoomControls: true,
+      nodeOverlap: 10,
+
+      dataSource: graph,
+      zoomControls: true,
+      initialScale: 0.8,
+      directedEdges: true,
+
+      edgeCaption: 'caption',
+      edgeCaptionsOnByDefault: true,
+      edgeStyle: {
+          "all": {
+            "width": 4,
+            "color": "#ccc",
+            "opacity": 0.25,
+            "directed": true,
+            "curved": true,
+            "selected": {
+              "opacity": 1
+            },
+            "highlighted": {
+              "opacity": 1
+            },
+            "hidden": {
+              "opacity": 0
+            }
+          }
+        },
+
+      "nodeTypes": {"type": ["MusicRecording", "MusicGroup"]},
+      nodeCaptionsOnByDefault: true,
+      "nodeStyle": {
+        "all": {
+            radius: function(node) {
+                var props = node._properties;
+                console.log(props);
+                var multiplier = (props.type === 'MusicGroup' ? 10 : 0.1);
+                return multiplier * props.size;
+            },
+            opacity: 0.8,
+        },
+        "MusicRecording": {
+            color: "#3c91d044", // blue
+            borderColor: "#eee"
+        },
+        "MusicGroup":{
+            color: "#ef5c5e44", // red
+            borderColor: "#eee"
+        }
+      }
+    };
+
+    var alchemy = new Alchemy(config);
+
+    console.log(alchemy);
+  </script>
+</body>
+</html>

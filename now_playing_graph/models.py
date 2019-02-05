@@ -97,6 +97,8 @@ def timeline_to_models(timeline):
     :type timeline list[now_playing_graph.timeline.TimelineEntry]
     :rtype: list[BaseModel]
     """
+    timeline = list(timeline)
+
     # create a unique set of artists
     artists = {entry.artist_name for entry in timeline}  # set comprehension
     artists = sorted(artists)

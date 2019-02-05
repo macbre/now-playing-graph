@@ -71,9 +71,9 @@ TimelineEntry(artist_name='Wolfgang', song_title='Ice Cold', duration=180, playe
 `timeline_to_models` helper will give you a set of models with songs linking back to artists:
 
 ```
-<ArtistModel https://schema.org/MusicGroup (Eivør Pálsdóttir)>
-<ArtistModel https://schema.org/MusicGroup (Enekk)>
-<ArtistModel https://schema.org/MusicGroup (Orka)>
+<ArtistModel https://schema.org/MusicGroup (Eivør Pálsdóttir) songs = "3">
+<ArtistModel https://schema.org/MusicGroup (Enekk) songs = "2">
+<ArtistModel https://schema.org/MusicGroup (Orka) songs = "1">
 <SongModel https://schema.org/MusicRecording (Elisabeth og Elinborg) duration = "253">
 	--[:byArtist]->(Eivør Pálsdóttir)
 <SongModel https://schema.org/MusicRecording (Mannabarn) duration = "292">

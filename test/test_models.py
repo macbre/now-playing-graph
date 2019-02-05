@@ -5,6 +5,18 @@ from now_playing_graph.models import ArtistModel, SongModel, timeline_to_models
 from now_playing_graph.stream import kvf_stream_to_timeline
 
 
+def test_model():
+    artist = ArtistModel(name='Foo Fighters', properties={'songs': 0})
+
+    artist['songs'] += 1
+    artist['foo'] = 'bar'
+
+    assert artist['songs'] == 1
+    assert artist['foo'] == 'bar'
+    assert artist.get_properties() == dict(songs=1, foo='bar')
+    # assert False
+
+
 def test_models():
     artist = ArtistModel(name='Foo Fighters')
 

@@ -42,6 +42,12 @@ class BaseModel:
         """
         return self._hash
 
+    def __getitem__(self, item):
+        return self.properties.get(item)
+
+    def __setitem__(self, key: str, value):
+        self.properties[key] = value
+
     def __repr__(self):
         ret = '<{} https://schema.org/{} ({})'.\
             format(self.__class__.__name__, self.get_type(), self.name)
@@ -91,22 +97,25 @@ def timeline_to_models(timeline):
     :type timeline list[now_playing_graph.timeline.TimelineEntry]
     :rtype: list[BaseModel]
     """
-    # prepare a list of unique (artist, song) pairs and artists
-    artists = set()
-    songs = set()
-
-    for entry in timeline:
-        artists.add(entry.artist_name)
-        songs.add((entry.artist_name, entry.song_title, entry.duration))
-
-    # sort the sets to make them more deterministic
-    artists = list(sorted(artists))
-    songs = list(sorted(songs))
+    # create a unique set of artists
+    artists = set([entry.artist_name for entry in timeline])
+    artists = sorted(artists)
 
     # build a hash of artists models
     artists = {
         artist: ArtistModel(name=artist) for artist in artists
     }
+
+    # prepare a list of unique (artist, song) pairs
+    songs = set()
+
+    for entry in timeline:
+        songs.add((entry.artist_name, entry.song_title, entry.duration))
+
+        # TODO: increase songs counter for each artist
+
+    # sort the sets to make them more deterministic
+    songs = list(sorted(songs))
 
     # print(artists, songs)
 

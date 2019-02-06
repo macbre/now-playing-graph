@@ -101,19 +101,19 @@ var graph={"nodes": [{"id": "5fea5f66b", "caption": "Alex B\u00e6rendsen", "type
 
 
 /**
- *
+ * @see http://graphalchemist.github.io/Alchemy/#/docs
  */
 
     var config = {
       backgroundColor: 'transparent',
-      alpha: 1,
       divSelector: '#graph',
-      nodeOverlap: 50,
+
+      linkDistancefn: function(node) {
+        // console.log(node);
+        return Math.max(node.source.radius, node.target.radius) * 1.75;
+      },
 
       dataSource: graph,
-      zoomControls: true,
-      initialScale: 0.8,
-      directedEdges: true,
 
       edgeCaption: 'caption',
       edgeStyle: {
@@ -142,7 +142,7 @@ var graph={"nodes": [{"id": "5fea5f66b", "caption": "Alex B\u00e6rendsen", "type
             radius: function(node) {
                 var props = node._properties;
                 // console.log(props);
-                var multiplier = (props.type === 'MusicGroup' ? 5 : 0.05);
+                var multiplier = (props.type === 'MusicGroup' ? 3 : 0.07);
                 return multiplier * props.size;
             },
             opacity: 0.8,

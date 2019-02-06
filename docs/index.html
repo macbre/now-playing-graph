@@ -5,6 +5,8 @@
 </head>
 <body>
   <h1 id="title">Artists and their songs aired by Útvarpið</h1>
+  <h2><strong id="songs-count">X</strong> songs by <strong id="artists-count">X</strong> artists</h2>
+
   <div class="alchemy" id="graph"></div>
   <footer>
       Graph of artists and songs <a href="https://kvf.fo/popout/widget" target="_blank">aired by Faroese Public Radio - kvf.fo</a>.
@@ -32,6 +34,7 @@
     }
 
     h1 {
+      letter-spacing: -1px;
       position: absolute;
       left: 20px;
       top: 20px;
@@ -41,6 +44,20 @@
       z-index: 2;
       margin: 0;
       padding: 0.25em 0.5em;
+    }
+
+    h2 {
+        letter-spacing: -1px;
+        font-size: 1.25em;
+        font-weight: normal;
+        background: #3c91d099;
+        color: #ffffffcc;
+        position: absolute;
+        left: 20px;
+        top: 70px;
+        z-index: 2;
+        margin: 0;
+        padding: 0.25em 0.5em;
     }
 
     footer {
@@ -161,6 +178,10 @@ var graph={"nodes": [{"id": "5fea5f66b", "caption": "Alex B\u00e6rendsen", "type
     var alchemy = new Alchemy(config);
 
     console.log(alchemy);
+
+    // update stats
+    $('#songs-count').text(document.querySelectorAll('.MusicRecording').length);
+    $('#artists-count').text(document.querySelectorAll('.MusicGroup').length);
   </script>
 </body>
 </html>

@@ -88,7 +88,7 @@ TimelineEntry(artist_name='Wolfgang', song_title='Ice Cold', duration=180, playe
 	--[:byArtist]->(Orka)
 ```
 
-`models_to_graph_json` helper will then return GraphJSON representation of the timeline:
+`models_to_graph_json` helper will then return [GraphJSON](https://github.com/jsongraph/json-graph-specification) representation of the timeline:
 
 ```json
 {

@@ -57,15 +57,16 @@ footer a {
 
 /* Show Captions */
 .node text {
-    font-size: 15px;
+    font-size: 19px;
     fill: #333333ee;
     text-shadow: none;
 }
 .MusicGroup text {
     fill: #ef5c5e;
-    font-size: 16px;
+    font-size: 26px;
     font-weight: bold;
     letter-spacing: -1px;
+    display: block !important;
 }
 
 .edge.active text {

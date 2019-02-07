@@ -1,0 +1,83 @@
+body {
+    font-family: "Josefin Sans";
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eeeeee+0,aaaaaa+100,7db9e8+100 */
+    background: #3c91d033; /* Old browsers */
+    background: radial-gradient(ellipse at center, #3c91d000 0%,#3c91d030 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+h1 {
+    letter-spacing: -1px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: #3c91d0;
+    background: #3c91d033;
+    border-bottom: solid 3px #3c91d0;
+    z-index: 2;
+    margin: 0;
+    padding: 0.25em 0.5em;
+}
+
+h2 {
+    letter-spacing: -1px;
+    font-size: 1.25em;
+    font-weight: normal;
+    background: #3c91d099;
+    color: #ffffffcc;
+    position: absolute;
+    left: 20px;
+    top: 70px;
+    z-index: 2;
+    margin: 0;
+    padding: 0.25em 0.5em;
+}
+
+footer {
+    box-shadow: #3c91d033 0px 0px 50px 0;
+    background: #ffffffcc;
+    padding: .5em;
+    color: #000000bb;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: .85em;
+    line-height: 1.75em;
+    text-align: right;
+}
+
+footer a {
+    text-decoration: none;
+    color: #3c91d0;
+    font-weight: bold;
+    border-bottom: solid 2px #3c91d066;
+}
+
+/* Show Captions */
+.node text {
+    font-size: 19px;
+    fill: #333333ee;
+    text-shadow: none;
+}
+.MusicGroup text {
+    fill: #ef5c5e;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    display: block !important;
+}
+
+.edge.active text {
+    font-size: 10px;
+    fill: #33333399;
+    text-shadow: none !important;
+    font-weight: bold;
+}
+
+/**
+.edge text {
+display: block !important;
+}
+**/

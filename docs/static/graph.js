@@ -47,7 +47,7 @@
                     multiplier = (isBig ? 3 : 0.05),
                     radius = Math.min(multiplier * props.size, NODE_MAX_RADIUS) * (isBig ? 2 : 1);
 
-                console.log([props.type, props.size, radius]);
+                // console.log([props.type, props.size, radius]);
                 return radius;
             },
             opacity: 0.8,
@@ -65,10 +65,43 @@
             borderColor: "#eee"
         }
         },
-        "nodeMouseOver": function(node) {
-            return 'foo';
-        }
+
+        // show and hide smaller nodes when mousing over a big one
+        nodeMouseOver: function(node) {
+            console.log('nodeMouseOver', node);
+            // console.log('nodes', getNodesSubnet(node));
+
+            getNodesSubnet(node).forEach(function(neighbour) {
+                console.log('neighbour', neighbour);
+
+                //neighbour._state = "selected";
+                //neighbour.setStyle();
+            });
+
+        },
+        nodeMouseOut: function(args) {
+            var node = args.self;
+            console.log('nodeMouseOut', node);
+            console.log('nodes', getNodesSubnet(node));
+        },
     };
+
+    // this function returns a list of all nodes connected with the provided one
+    function getNodesSubnet(node) {
+        var nodeIds = [];
+
+        // get all target nodes
+        node._adjacentEdges.forEach(function(edge){
+            var targetId = edge._properties.source;
+            // console.log(edge, targetId);
+
+            if (targetId !== node.id) {
+                nodeIds.push(targetId);
+            }
+        });
+
+        return alchemy.getNodes.apply(alchemy, nodeIds);
+    }
 
     var alchemy = new Alchemy(config);
 

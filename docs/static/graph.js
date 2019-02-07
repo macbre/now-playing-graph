@@ -71,22 +71,24 @@
             console.log('nodeMouseOver', node);
             // console.log('nodes', getNodesSubnet(node));
 
-            getNodesSubnet(node).forEach(function(neighbour) {
-                console.log('neighbour', neighbour);
-
-                //neighbour._state = "selected";
-                //neighbour.setStyle();
+            getNodesSubnet(node).forEach(function(neighbourId) {
+                var node = $('#text-' + neighbourId);
+                node.show();
             });
 
         },
         nodeMouseOut: function(args) {
             var node = args.self;
             console.log('nodeMouseOut', node);
-            console.log('nodes', getNodesSubnet(node));
+
+            getNodesSubnet(node).forEach(function(neighbourId) {
+                var node = $('#text-' + neighbourId);
+                node.hide();
+            });
         },
     };
 
-    // this function returns a list of all nodes connected with the provided one
+    // this function returns a list of *IDs* of all nodes connected with the provided one
     function getNodesSubnet(node) {
         var nodeIds = [];
 
@@ -100,7 +102,8 @@
             }
         });
 
-        return alchemy.getNodes.apply(alchemy, nodeIds);
+        //return alchemy.getNodes.apply(alchemy, nodeIds);
+        return nodeIds;
     }
 
     var alchemy = new Alchemy(config);

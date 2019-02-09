@@ -12,7 +12,8 @@ from now_playing_graph.models import timeline_to_models
 from now_playing_graph.stream import read_gzip, kvf_stream_to_timeline
 
 # MIN_SONGS = 1  # Got a 2996 models (1187 artists and 1809 songs)
-MIN_SONGS = 5  # Got a 469 models (76 artists and 393 songs)
+MIN_SONGS = 3  # Got a 757 models (188 artists and 569 songs)
+# MIN_SONGS = 5  # Got a 391 models (76 artists and 315 songs)
 
 
 def main():

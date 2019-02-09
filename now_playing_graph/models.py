@@ -134,11 +134,16 @@ def timeline_to_models(timeline, min_songs: int = None):
     # prepare a list of unique (artist, song) pairs
     songs = set()
 
+    # duration varies slightly for some songs as we calculate it using timeline entries
+    songs_duration = dict()
+
     for entry in timeline:
-        songs.add((entry.artist_name, entry.song_title, entry.duration))
+        songs.add((entry.artist_name, entry.song_title))
 
         # increase songs counter for each artist
         artists[entry.artist_name]['songs'] += 1
+
+        songs_duration['{}_{}'.format(entry.artist_name, entry.song_title)] = entry.duration
 
     # filter out artists with less than min_songs
     if min_songs:
@@ -155,10 +160,10 @@ def timeline_to_models(timeline, min_songs: int = None):
     songs = [
         SongModel(
             name=song,
-            properties={'duration': duration},
+            properties={'duration': songs_duration['{}_{}'.format(artist, song)]},
             relations={'byArtist': artists[artist]}
         )
-        for artist, song, duration in songs if artist in artists
+        for artist, song in songs if artist in artists
     ]
 
     # return both artists and songs (and  make the order deterministic)

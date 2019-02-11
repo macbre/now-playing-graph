@@ -29,8 +29,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'render_graph=now_playing_graph.scripts.graph_json:main'
+            'render_graph=now_playing_graph.scripts.graph_json:main',
+            'get_stats=now_playing_graph.scripts.get_stats:main'
         ],
     }
-
 )

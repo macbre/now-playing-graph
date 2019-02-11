@@ -39,6 +39,22 @@ curl -s --max-time 3 'https://netvarp.kringvarp.fo:80/sse' 2>&1  | grep data >> 
 * `duration`([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT6M33S`)
 * `name`
 
+## Statistics
+
+```
+$ get_stats
+2019-02-11 21:41:47 render_graph         INFO     Going to parse a stream from /home/macbre/src/git/now-playing-graph/data/kvf.log.gz
+2019-02-11 21:41:47 root                 INFO     Lines parsed: 21959
+2019-02-11 21:41:47 render_graph         INFO     Got a timeline with 2197 entries
+top_artists: [('Eyðun Nolsøe', 16), ('Marius Ziska', 16), ('Streaplers', 14), ('Jens Marni Hansen', 14), ('Blátt Gras', 13), ('Ole Ivars', 13), ('Dalia Ouziel,  Gil Sharon,  Ron Ephrat,  Etc.', 12), ('Contrazt', 12), ('Dænsebændet', 12), ('Lasse Stefanz', 12)]
+
+top_songs: [('Lukkan er ei gullið', 10), ('Á tíni slóð', 9), ('Eitt lítið tár í tøgnini', 9), ('Einsemi', 8), ('Heima er saman við tær', 7), ('Lieder Ohne Worte No. 3 in G Minor, Op. 53: Presto Agitato', 6), ('Samrøða fjalla millum', 6), ("Bahib'm'bau (kom við)", 6), ('Leingist so', 6), ('Piano Concerto in A Minor, Op. 7: I. Allegro Maestoso', 6)]
+
+longest_songs: [('Symphony in C minor I. Allegro molto', 844), ('Mendelssohn: Piano Sextet In D, Op. 110 - 1. Allegro Vivace', 773), ('4th Symphony - 3.Il tempo largo', 720), ('Mendelssohn: Piano Sextet In D, Op. 110 - 4. Allegro Vivace', 694), ('Trombone Concerto, Op.81 - 2. satsur Andante', 662), ('Piano Trio In G Minor, Op. 17: I. Allegro Moderato', 633), ('Heljareyga', 613), ('Periferi', 605), ('4th Symphony - 1.Tempo molto moderato, quasi adagio', 598), ('4th Symphony - 4.Allegro', 564)]
+
+longest_artists: [('Ilona Prunyi', 2433), ('Gothenburg Symphony Orchestra cond. Okko Kamu, Cond.: Okko Kamu', 2210), ('Berliner Philharmoniker - Herbert von Karajan', 2168), ('Marius Ziska', 2097), ('Ólavur á Váli', 2044), ('Hannis', 1996), ('Dalia Ouziel,  Gil Sharon,  Ron Ephrat,  Etc.', 1952), ('Stockholm Sinfonietta,  Neemi Jærvi stjórnar', 1869), ('Streaplers', 1745), ('Moyzeskvartettin', 1620)]
+```
+
 ## Data examples
 
 Here's the snippet of collected data:

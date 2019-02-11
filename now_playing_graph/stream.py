@@ -42,9 +42,12 @@ def kvf_stream_to_timeline(lines):
     :type lines list[str]
     :rtype: list[TimelineEntry]
     """
+    lines_count = 0
     last_updated = current_entry = None
 
     for line_no, line in enumerate(lines):
+        lines_count += 1
+
         # ignore lines without a prefix
         # data: {"updated":"2019-01-22T20:31:37.973","now":..}}
         if not line.startswith('data: {'):
@@ -116,3 +119,5 @@ def kvf_stream_to_timeline(lines):
             # the duration of the current song
             if current_entry.duration > 0:
                 yield current_entry
+
+    logging.info("Lines parsed: %d", lines_count)

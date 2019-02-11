@@ -5,11 +5,11 @@ Simply execute "render_graph"
 """
 import logging
 
-from os import path
-
 from now_playing_graph.graph import models_to_graph_json
 from now_playing_graph.models import timeline_to_models
 from now_playing_graph.stream import read_gzip, kvf_stream_to_timeline
+
+from . import INPUT_FILE
 
 # MIN_SONGS = 1  # Got a 2996 models (1187 artists and 1809 songs)
 MIN_SONGS = 3  # Got a 757 models (188 artists and 569 songs)
@@ -22,17 +22,10 @@ def main():
     """
     logger = logging.getLogger('render_graph')
 
-    # input file
-    input_file = path.realpath(path.join(
-        path.dirname(__file__),
-        '../../data',
-        'kvf.log.gz'
-    ))
-
-    logger.info("Going to parse a stream from %s", input_file)
+    logger.info("Going to parse a stream from %s", INPUT_FILE)
 
     # read and parse the stream into a timeline
-    timeline = list(kvf_stream_to_timeline(read_gzip(input_file)))
+    timeline = list(kvf_stream_to_timeline(read_gzip(INPUT_FILE)))
 
     logger.info('Got a timeline with %d entries', len(timeline))
     logger.info(timeline[0])
